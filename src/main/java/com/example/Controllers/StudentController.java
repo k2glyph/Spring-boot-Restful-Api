@@ -19,6 +19,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/students")
 public class StudentController {
+    private boolean update=false;
     private static List<Student> studentList = new ArrayList<Student>();
 
     static {
@@ -32,6 +33,9 @@ public class StudentController {
     @RequestMapping(value="",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Student> getAllStudent() {
+        if(studentList.isEmpty()){
+            throw  new StudentNotFound();
+        }
         return studentList;
     }
     @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,7 +46,7 @@ public class StudentController {
                 return s;
             }
         }
-        return null;
+        throw new StudentNotFound();
     }
     @RequestMapping(value = "",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -52,14 +56,22 @@ public class StudentController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Student updateStudent(@PathVariable("id") int id, @RequestBody Student student) {
+    public StudentRespone updateStudent(@PathVariable("id") int id, @RequestBody Student student) {
         for (Student s : studentList) {
             if (s.getId() == id) {
                 s.setFirstname(student.getFirstname());
                 s.setLastname(student.getLastname());
+                s.setAddress(student.getAddress());
+                update=true;
+                break;
             }
         }
-        return student;
+        if(update){
+            return new StudentRespone("Successfully student updated");
+
+        }else{
+            throw new StudentNotFound();
+        }
     }
     @RequestMapping(value="/{id}",method = RequestMethod.DELETE)
     @ResponseBody
