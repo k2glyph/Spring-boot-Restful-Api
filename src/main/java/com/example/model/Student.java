@@ -1,22 +1,25 @@
 package com.example.model;
 
-import java.io.Serializable;
+
 
 /**
  * Created by dinesh on 6/20/2016.
  */
 public class Student{
+
     private int id;
     private String firstname;
     private String lastname;
+    private Address address;
 
     public Student() {
     }
 
-    public Student(int id, String firstname, String lastname) {
+    public Student(int id, String firstname, String lastname,Address address) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.address=address;
     }
 
     public int getId() {
@@ -41,5 +44,13 @@ public class Student{
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

@@ -1,8 +1,12 @@
 package com.example.Controllers;
 
+import com.example.model.Address;
 import com.example.model.Student;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +22,11 @@ public class StudentController {
     private static List<Student> studentList = new ArrayList<Student>();
 
     static {
-        studentList.add(new Student(1, "Bhaii", "Magar"));
-        studentList.add(new Student(2, "Dai", "Uncle"));
-        studentList.add(new Student(3, "Magar", "Fuche"));
-        studentList.add(new Student(4, "Dai", "Bhai"));
-        studentList.add(new Student(5, "Yubraj", "Paudel"));
+        studentList.add(new Student(1, "Bhaii", "Magar",new Address("lalbandi -6","Kathmandu","Nepal")));
+        studentList.add(new Student(2, "Dai", "Uncle",new Address("new Baneshower -15","Kathmandu","Nepal")));
+        studentList.add(new Student(3, "Magar", "Fuche",new Address("tinkune -14","Kathmandu","Nepal")));
+        studentList.add(new Student(4, "Dai", "Bhai",new Address("maitidevi -50","Kathmandu","Nepal")));
+        studentList.add(new Student(5, "Yubraj", "Paudel",new Address("Ratna park -1","Kathmandu","Nepal")));
     }
 
     @RequestMapping(value="",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
