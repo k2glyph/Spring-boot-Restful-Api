@@ -63,7 +63,7 @@ public class StudentController {
     }
     @RequestMapping(value="/{id}",method = RequestMethod.DELETE)
     @ResponseBody
-    public void deleteStudent(@PathVariable("id") int id ){
+    public StudentRespone deleteStudent(@PathVariable("id") int id ){
         Student deleteStudent=null;
         for(Student s:studentList){
             if(s.getId()==id){
@@ -72,9 +72,10 @@ public class StudentController {
             }
         }
         if(deleteStudent==null){
-
+            throw new StudentNotFound();
         }else{
             studentList.remove(deleteStudent);
+            return new StudentRespone("Student Successfully Deleted");
         }
     }
 
