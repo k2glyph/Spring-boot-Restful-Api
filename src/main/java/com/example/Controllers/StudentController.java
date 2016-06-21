@@ -50,8 +50,11 @@ public class StudentController {
     }
     @RequestMapping(value = "",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void addStudent(@RequestBody Student s) {
+    public StudentRespone addStudent(@RequestBody Student s) {
+        StudentRespone s1=new StudentRespone();
         studentList.add(s);
+        s1.setMsg("Successfully Create Student");
+        return s1;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -80,7 +83,6 @@ public class StudentController {
         for(Student s:studentList){
             if(s.getId()==id){
                 deleteStudent=s;
-
             }
         }
         if(deleteStudent==null){
